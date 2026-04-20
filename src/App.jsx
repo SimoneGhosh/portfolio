@@ -147,11 +147,9 @@ function App() {
                   </p>
 
                   <h4>My life so far:</h4>
-                  <ul>
-                    <li><p>2026: UW Blueprint + WatAI - Dev for Social Good</p></li>
-                    <li><p>2026: Web Dev @GenerisGP - Feedback Dashboard w/ NLP</p></li>
-                    <li><p>2021: Coded for the first time! Made a HTML site about jellyfish</p></li>
-                  </ul>
+                    <p>2026: UW Blueprint + WatAI - Dev for Social Good</p>
+                    <p>2026: Web Dev @GenerisGP - Feedback Dashboard w/ NLP</p>
+                    <p>2021: Coded for the first time! Made a HTML site about jellyfish</p>
                 </div>
               </div>
             </div>
