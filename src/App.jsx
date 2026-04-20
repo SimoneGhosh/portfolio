@@ -1,5 +1,11 @@
 import { useState } from 'react'
 import './App.css'
+import portraitImg from './assets/portrait.jpg'
+import catImg from './assets/cat.jpg'
+import monkeyImg from './assets/monkey.png'
+import internetlibraryImg from './assets/internetlibrary.png'
+import platformgameImg from './assets/platformgame.png'
+import interactiveroomImg from './assets/interactiveroom.png'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +20,7 @@ function App() {
               <h1>Simone Ghosh</h1>
             </span>
             <div class="general-about">
-              <img class="pfp-fallback" src="src/assets/portrait.jpg" alt="simone's profile picture" />
+              <img class="pfp-fallback" src={portraitImg} alt="simone's profile picture" />
             </div>
             <div class="Mood">
               <p>
@@ -65,7 +71,7 @@ function App() {
 
             <div class="url-info">
               <p><b>Profile URL:</b></p>
-              <p>https://portfolio.simoneghosh.com</p>
+              <p>https://simoneghosh.github.io/portfolio/</p>
             </div>
 
             <div class="table-section">
@@ -81,7 +87,7 @@ function App() {
                       </td>
                       <td>
                           <p>My cute cat!</p>
-                          <img src="src/assets/cat.jpg" alt="simone's cat picture" />
+                          <img src={catImg} alt="simone's cat picture" />
                       </td>
                     </tr>
                     <tr>
@@ -162,7 +168,7 @@ function App() {
                         <p>Interpreter in Go</p>
                       </a>
                       <a href="https://github.com/SimoneGhosh/Programming-Language-Interpreter">
-                        <img class="pfp-fallback" src="src\assets\monkey.png" alt="interpreter in go project screenshot" loading="lazy"/>
+                        <img class="pfp-fallback" src={monkeyImg} alt="interpreter in go project screenshot" loading="lazy"/>
                       </a>
                     </div>
                     <div class="person">
@@ -170,7 +176,7 @@ function App() {
                         <p>Little Internet Library</p>
                       </a>
                       <a href="https://github.com/SimoneGhosh/Little-Internet-Library">
-                        <img class="pfp-fallback" src="src\assets\internetlibrary.png" alt="little internet library project screenshot" loading="lazy"/>
+                        <img class="pfp-fallback" src={internetlibraryImg} alt="little internet library project screenshot" loading="lazy"/>
                       </a>
                     </div>
                     <div class="person">
@@ -178,7 +184,7 @@ function App() {
                         <p>Platformer Game</p>
                       </a>
                       <a href="https://github.com/JolieeZhuu/jeometry-dash">
-                        <img class="pfp-fallback" src="src\assets\platformgame.png" alt="platformer game project screenshot" loading="lazy"/>
+                        <img class="pfp-fallback" src={platformgameImg} alt="platformer game project screenshot" loading="lazy"/>
                       </a>
                     </div>
                     <div class="person">
@@ -186,7 +192,7 @@ function App() {
                         <p>Interactive Room</p>
                       </a>
                       <a href="https://github.com/SimoneGhosh/my_portfolio">
-                        <img class="pfp-fallback" src="src\assets\interactiveroom.png" alt="interactive room project screenshot" loading="lazy"/>
+                        <img class="pfp-fallback" src={interactiveroomImg} alt="interactive room project screenshot" loading="lazy"/>
                       </a>
                     </div>
                   </div>
