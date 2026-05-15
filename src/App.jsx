@@ -6,6 +6,7 @@ import monkeyImg from './assets/monkey.png'
 import internetlibraryImg from './assets/internetlibrary.png'
 import platformgameImg from './assets/platformgame.png'
 import interactiveroomImg from './assets/interactiveroom.png'
+import fineduImg from './assets/finedu.png'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -191,6 +192,14 @@ function App() {
                       </a>
                       <a href="https://github.com/SimoneGhosh/my_portfolio">
                         <img class="pfp-fallback" src={interactiveroomImg} alt="interactive room project screenshot" loading="lazy"/>
+                      </a>
+                    </div>
+                    <div class="person">
+                      <a href="https://github.com/SimoneGhosh/NoClueCrew">
+                        <p>Financial Education Game</p>
+                      </a>
+                      <a href="https://no-clue-crew.vercel.app/">
+                        <img class="pfp-fallback" src={fineduImg} alt="financial education game project screenshot" loading="lazy"/>
                       </a>
                     </div>
                   </div>
