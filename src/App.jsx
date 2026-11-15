@@ -1,215 +1,45 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import portraitImg from './assets/portrait.jpg'
-import catImg from './assets/cat.jpg'
-import monkeyImg from './assets/monkey.png'
-import internetlibraryImg from './assets/internetlibrary.png'
-import platformgameImg from './assets/platformgame.png'
-import interactiveroomImg from './assets/interactiveroom.png'
-import fineduImg from './assets/finedu.png'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import { BlogList, BlogEntry } from './pages/Blog'
+import blogs from './blogs'
+
+// Hash-based routing keeps deep links working on GitHub Pages without a server fallback.
+function useHashPath() {
+  const [hash, setHash] = useState(window.location.hash)
+
+  useEffect(() => {
+    const onChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onChange)
+    return () => window.removeEventListener('hashchange', onChange)
+  }, [])
+
+  return hash.replace(/^#/, '').replace(/\/+$/, '') || '/'
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const path = useHashPath()
+  const entrySlug = path.startsWith('/blog/') ? path.slice('/blog/'.length) : null
+  const isBlog = path === '/blog' || entrySlug !== null
 
-  return (
-    <div class="container flex min-h-screen items-center justify-center">
-      <main>
-        <div class="row profile">
-          <div class="col w-40 left"> 
+  let page = <Home />
+  let title = "Simone's Profile"
+  if (entrySlug !== null) {
+    const blog = blogs.find((b) => b.slug === entrySlug)
+    page = <BlogEntry slug={entrySlug} />
+    title = `${blog ? blog.title : 'Not found'} - Simone's Blog`
+  } else if (path === '/blog') {
+    page = <BlogList />
+    title = "Simone's Blog"
+  }
 
-            <span class="font-extrabold" >
-              <h1>Simone Ghosh</h1>
-            </span>
-            <div class="general-about">
-              <img class="pfp-fallback" src={portraitImg} alt="simone's profile picture" />
-            </div>
-            <div class="Mood">
-              <p>
-                <b>mood: </b>
-                 Silly & Goofy
-              </p>
-            </div>
+  useEffect(() => {
+    document.title = title
+    window.scrollTo(0, 0)
+  }, [path, title])
 
-            <div class="contact">
-              <div class="heading">
-                <h4>Contact Simone</h4>
-              </div>
-              <div class="inner">
-
-                <div class="f-row">
-                  <div class="f-col">
-                    <a href="mailto:s66ghosh@uwaterloo.ca">
-                      <img src="https://static.spacehey.net/icons/add.png" class="icon" aria-hidden="true" loading="lazy" alt=""/> 
-                        Email
-                    </a>
-                  </div>
-
-                  <div class="f-col">
-                    <a href="https://www.linkedin.com/in/simoneghosh/">
-                      <img src="https://static.spacehey.net/icons/add.png" class="icon" aria-hidden="true" loading="lazy" alt=""/>                
-                        Linkedin
-                    </a>
-                  </div>
-                </div>
-
-                <div class="f-row">
-                  <div class="f-col">
-                    <a href="https://github.com/SimoneGhosh">
-                      <img src="https://static.spacehey.net/icons/add.png" class="icon" aria-hidden="true" loading="lazy" alt=""/> 
-                        Github
-                    </a>
-                  </div>
-
-                  <div class="f-col">
-                    <a href="https://x.com/simonesyde">
-                      <img src="https://static.spacehey.net/icons/add.png" class="icon" aria-hidden="true" loading="lazy" alt=""/>                
-                        X
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="url-info">
-              <p><b>Profile URL:</b></p>
-              <p>https://simoneghosh.github.io/portfolio/</p>
-            </div>
-
-            <div class="table-section">
-              <div class="heading">
-                <h4>Simone's Interests</h4>
-              </div>
-              <div class="inner">
-                <table class="details-table" cellspacing="3" cellpadding="3">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>General</p>
-                      </td>
-                      <td>
-                          <p>My cute cat!</p>
-                          <img src={catImg} alt="simone's cat picture" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>Music</p>
-                      </td>
-                      <td>
-                        <p>
-                          Laufey, PinkPantheress, Olivia Dean, Beabadoobee
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>Movies</p>
-                      </td>
-                      <td>
-                          <p>The Hangover, The Hangover Part II, The Hangover Part III</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>Television</p>
-                      </td>
-                      <td>
-                        <p>
-                          House MD
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>Books</p>
-                      </td>
-                      <td>
-                          <p>A Man Called Ove</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>        
-
-          <div class="col right">
-
-            <div class="blurbs">
-              <div class="heading">
-                <h4>Simone's Blurbs</h4>
-              </div>
-              <div class="inner">
-                <div class="section">
-                  <h4>About me:</h4>
-                  <p itemprop="description">
-                    <p>Hiii! I love eating, painting, reading and coding.</p>
-                    <p>Systems Design Engineering @uWaterloo</p>
-                  </p>
-
-                  <h4>My life so far:</h4>
-                    <p>2026: UW Blueprint + WatAI - Dev for Social Good</p>
-                    <p>2026: Web Dev @GenerisGP - Feedback Dashboard w/ NLP</p>
-                    <p>2021: Coded for the first time! Made a HTML site about jellyfish</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="friends">
-              <div class="heading">
-                <h4>Simone's Project Space</h4>
-              </div>
-              <div class="inner">
-                <p><b>I am currently working on a compiler in C++.</b></p>
-                  <div class="friends-grid">
-                    <div class="person">
-                      <a href="https://github.com/SimoneGhosh/Programming-Language-Interpreter">
-                        <p>Interpreter in Go</p>
-                      </a>
-                      <a href="https://github.com/SimoneGhosh/Programming-Language-Interpreter">
-                        <img class="pfp-fallback" src={monkeyImg} alt="interpreter in go project screenshot" loading="lazy"/>
-                      </a>
-                    </div>
-                    <div class="person">
-                      <a href="https://github.com/SimoneGhosh/Little-Internet-Library">
-                        <p>Little Internet Library</p>
-                      </a>
-                      <a href="https://github.com/SimoneGhosh/Little-Internet-Library">
-                        <img class="pfp-fallback" src={internetlibraryImg} alt="little internet library project screenshot" loading="lazy"/>
-                      </a>
-                    </div>
-                    <div class="person">
-                      <a href="https://github.com/JolieeZhuu/jeometry-dash">
-                        <p>Platformer Game</p>
-                      </a>
-                      <a href="https://github.com/JolieeZhuu/jeometry-dash">
-                        <img class="pfp-fallback" src={platformgameImg} alt="platformer game project screenshot" loading="lazy"/>
-                      </a>
-                    </div>
-                    <div class="person">
-                      <a href="https://github.com/SimoneGhosh/my_portfolio">
-                        <p>Interactive Room</p>
-                      </a>
-                      <a href="https://github.com/SimoneGhosh/my_portfolio">
-                        <img class="pfp-fallback" src={interactiveroomImg} alt="interactive room project screenshot" loading="lazy"/>
-                      </a>
-                    </div>
-                    <div class="person">
-                      <a href="https://github.com/SimoneGhosh/NoClueCrew">
-                        <p>Financial Education Game</p>
-                      </a>
-                      <a href="https://no-clue-crew.vercel.app/">
-                        <img class="pfp-fallback" src={fineduImg} alt="financial education game project screenshot" loading="lazy"/>
-                      </a>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  )
+  return <Layout active={isBlog ? 'blog' : 'home'}>{page}</Layout>
 }
 
 export default App
